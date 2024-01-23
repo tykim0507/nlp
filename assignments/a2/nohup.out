@@ -1,0 +1,17 @@
+iter 10: 19.061546
+iter 20: 19.114918
+iter 30: 19.287617
+iter 40: 19.352559
+iter 50: 19.559119
+Traceback (most recent call last):
+  File "run.py", line 43, in <module>
+    wordVectors, 0.3, 40000, None, True, PRINT_EVERY=10)
+  File "/mnt/c/Users/user/tykim/SNU/2-2/nlp/assignments/a2/sgd.py", line 90, in sgd
+    loss, grad = f(x)
+  File "run.py", line 42, in <lambda>
+    negSamplingLossAndGradient),
+  File "/mnt/c/Users/user/tykim/SNU/2-2/nlp/assignments/a2/word2vec.py", line 220, in word2vec_sgd_wrapper
+    outsideVectors, dataset, word2vecLossAndGradient
+  File "/mnt/c/Users/user/tykim/SNU/2-2/nlp/assignments/a2/word2vec.py", line 194, in skipgram
+    gradOutsideVectors += gradOutsideVectors_increment
+KeyboardInterrupt

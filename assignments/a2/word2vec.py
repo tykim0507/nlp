@@ -64,12 +64,11 @@ def naiveSoftmaxLossAndGradient(
     y = np.zeros(outsideVectors.shape[0])
     y[outsideWordIdx] = 1
     y_hat = softmax(np.dot(outsideVectors, centerWordVec))
-    # print(y_hat.shape)
+
     loss = -np.log(np.dot(y_hat, y))
     gradCenterVec = np.dot(outsideVectors.T, (y_hat - y))
 
-    dot_product = np.dot(y, y_hat)
-    gradOutsideVecs = np.dot(y_hat.reshape((y_hat.shape[0], 1)), centerWordVec.reshape((1, centerWordVec.shape[0])))
+    gradOutsideVecs = np.dot(np.expand_dims(y_hat, axis = 1), np.expand_dims(centerWordVec, axis = 0))
     gradOutsideVecs[outsideWordIdx] -= centerWordVec
 
     ### Please use the provided softmax function (imported earlier in this file)
@@ -135,7 +134,7 @@ def negSamplingLossAndGradient(
 
     gradOutsideVecs = np.zeros(outsideVectors.shape)
     gradOutsideVecs[outsideWordIdx] = -(1 - sigmoid_center_dot_product) * centerWordVec
-    gradOutsideVecs[indices] = np.dot((1 - sigmoid_negative_dot_product).reshape(K, 1), centerWordVec.reshape(1, centerWordVec.shape[0])) * count_vector[indices].reshape(K, 1)
+    gradOutsideVecs[indices] = np.dot(np.expand_dims((1 - sigmoid_negative_dot_product), axis = 1), np.expand_dims(centerWordVec, axis = 0)) * np.expand_dims(count_vector[indices], axis = 1)
 
 
 
